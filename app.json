@@ -32,6 +32,20 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera to take photos for editing."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos to save edited images.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save edited photos.",
+          "isAccessMediaLocationEnabled": true
+        }
       ]
     ],
     "experiments": {
