@@ -10,12 +10,16 @@ export default function HomeScreen() {
   const [facing, setFacing] = useState<CameraType>("back");
   const [permission, requestPermission] = useCameraPermissions();
   const router = useRouter();
+  const [cameraOn, setCameraOn] = useState(false);
 
   if (!permission?.granted) {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={requestPermission}>
+      <View style={[styles.container, styles.initial]}>
+        <TouchableOpacity onPress={requestPermission} style={styles.button}>
           <MaterialIcons name="camera" size={32} color="black" />
+          <ThemedText lightColor="black" darkColor="black">
+            Turn Camera On
+          </ThemedText>
         </TouchableOpacity>
       </View>
     );
@@ -60,10 +64,14 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  initial: {
+    backgroundColor: "transparent",
+  },
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "transparent",
   },
   camera: {
     flex: 1,

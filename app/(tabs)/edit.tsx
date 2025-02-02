@@ -22,7 +22,7 @@ import { useRef, useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import ViewShot from "react-native-view-shot";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 type Point = {
   x: number;
@@ -102,7 +102,7 @@ export default function TabTwoScreen() {
     const newSticker: Sticker = {
       id: Date.now().toString(),
       uri: stickerUri,
-      position: { x: width / 2 - 50, y: 200 }, // Center of screen
+      position: { x: width / 2 - 50, y: height / 2 - 1000 },
       scale: 1,
       rotation: 0,
     };
@@ -215,13 +215,13 @@ export default function TabTwoScreen() {
                     { translateY: sticker.position.y },
                   ],
                 },
-                selectedSticker === sticker.id && styles.selectedSticker,
               ]}
             >
               <Image
                 source={{ uri: sticker.uri }}
                 style={[
                   styles.sticker,
+                  selectedSticker === sticker.id && styles.selectedSticker,
                   {
                     transform: [
                       { scale: sticker.scale },
@@ -281,6 +281,9 @@ export default function TabTwoScreen() {
 
             router.push({
               pathname: "/",
+              params: {
+                forcePermission: 1,
+              },
             });
 
             Alert.alert("Cleared", "Image Discarded!");
@@ -385,12 +388,11 @@ const styles = StyleSheet.create({
   sticker: {
     width: 100,
     height: 100,
-    // position: "absolute",
-    zIndex: 1000,
+    position: "absolute",
   },
   selectedSticker: {
     borderWidth: 2,
-    borderColor: "#2196F3",
+    borderColor: "red",
     borderRadius: 5,
   },
   toolbar: {
